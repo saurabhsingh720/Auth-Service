@@ -9,4 +9,5 @@ ze db:migrate`
 - setting up different files
 - we can use path `localhost:3001/api/v1/signup` in postman
 - making the password encrypted by using `bcrypt` npm package
-- added attributes to show to the user like id and email
+- added attributes to show to the user like id and email.
+- Now install `npm i jsonwebtoken`

@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 
-const {PORT} = require('./config/serverConfig');
+const { PORT } = require('./config/serverConfig');
 const apiRoutes = require('./routes/index');
 
 /*
@@ -10,14 +10,16 @@ const {User} = require('./models/index');
 const bcrypt = require('bcrypt');
 */
 
-const UserRepository = require('./repository/user-repository');
+// const UserRepository = require('./repository/user-repository');
+
+// const UserService = require('./services/user-service');
 
 const app = express();
 
 const prepareAndServer = () => {
 
      app.use(bodyParser.json());
-     app.use(bodyParser.urlencoded({extended: true}));
+     app.use(bodyParser.urlencoded({ extended: true }));
 
      app.use('/api', apiRoutes);
 
@@ -36,7 +38,17 @@ const prepareAndServer = () => {
           const response = await repo.getById(1);
           console.log(response);
           */
-          
+
+          /*
+          const service = new UserService();
+          const newToken = service.createToken({ email: 'ajay@gmail.com', id: 4 });
+          console.log(newToken);
+
+          const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFqYXlAZ21haWwuY29tIiwiaWQiOjQsImlhdCI6MTcxOTY1MDQ1OCwiZXhwIjoxNzE5NjU0MDU4fQ.FpG6DRT1TQukYSY7Vq7H14-DuT5i3cBER6hXhU6iNHk';
+          const response = service.verifyToken(token);
+          console.log(response);
+          // */
+
      })
 }
 
