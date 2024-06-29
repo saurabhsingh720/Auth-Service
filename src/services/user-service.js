@@ -1,6 +1,7 @@
 const UserRepository = require('../repository/user-repository');
 const jwt = require('jsonwebtoken');
-const {JWT_KEY} = require('../config/serverConfig');
+const { JWT_KEY } = require('../config/serverConfig');
+const bcrypt = require('bcrypt');
 
 class UserService {
      constructor() {
@@ -17,9 +18,30 @@ class UserService {
           }
      }
 
+     async signIn(email, plainPassword) {
+          try {
+               //fetching the user using email
+               const user = await this.userRepository.getByEmail(email);
+
+               //comparing the incoming plain password with  stored encrypted password
+               const passwordsMatch = this.checkPassword(plainPassword, user.password);
+               if (!passwordsMatch) {
+                    console.log('Password doesnot match');
+                    throw { error: 'Incorrect password' };
+               }
+
+               //if password match then create a token and send it to the user
+               const newJWT = this.createToken({ email: user.email, id: user.id });
+               return newJWT;
+          } catch (error) {
+               console.log('Something went wrong in the sign in process');
+               throw error;
+          }
+     }
+
      createToken(user) {
           try {
-               const result = jwt.sign(user, JWT_KEY, {expiresIn: '1h'});
+               const result = jwt.sign(user, JWT_KEY, { expiresIn: '1h' });
                return result;
           } catch (error) {
                console.log("Something went wrong in token creation");
@@ -33,6 +55,15 @@ class UserService {
                return response;
           } catch (error) {
                console.log("Something went wrong in token validation", error);
+               throw error;
+          }
+     }
+
+     checkPassword(userInputPlainPassword, encryptedPassword) {
+          try {
+               return bcrypt.compareSync(userInputPlainPassword, encryptedPassword);
+          } catch (error) {
+               console.log("Something went wrong in password comparision");
                throw error;
           }
      }
