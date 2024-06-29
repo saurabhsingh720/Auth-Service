@@ -10,6 +10,8 @@ const {User} = require('./models/index');
 const bcrypt = require('bcrypt');
 */
 
+const UserRepository = require('./repository/user-repository');
+
 const app = express();
 
 const prepareAndServer = () => {
@@ -28,6 +30,13 @@ const prepareAndServer = () => {
           const response = bcrypt.compareSync(incomingpassword, user.password);
           console.log(response);
           */
+
+          /*
+          const repo = new UserRepository();
+          const response = await repo.getById(1);
+          console.log(response);
+          */
+          
      })
 }
 
