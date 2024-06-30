@@ -11,3 +11,5 @@ ze db:migrate`
 - making the password encrypted by using `bcrypt` npm package
 - added attributes to show to the user like id and email.
 - Now install `npm i jsonwebtoken`
+- Added all the function that helps in signing in in with the correct email and password.
+- Added function that only works when both email and password is entered by users.
