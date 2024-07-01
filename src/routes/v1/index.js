@@ -20,8 +20,9 @@ router.get(
 );
 
 router.get(
-     '/isAuthenticated',
-     UserController.isAuthenticated
-)
+     '/isAdmin',
+     AuthRequestValidators.validateIsAdminRequest,
+     UserController.isAdmin
+);
 
 module.exports = router;

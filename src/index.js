@@ -14,6 +14,10 @@ const bcrypt = require('bcrypt');
 
 // const UserService = require('./services/user-service');
 
+const db = require('./models/index');
+
+const {User, Role} = require('./models/index');
+
 const app = express();
 
 const prepareAndServer = () => {
@@ -48,6 +52,17 @@ const prepareAndServer = () => {
           const response = service.verifyToken(token);
           console.log(response);
           // */
+
+          if(process.env.DB_SYNC) {
+               db.sequelize.sync({alter: true});
+          }
+
+          // const u1 = await User.findByPk(4);
+          // const r1 = await Role.findByPk(1);
+          // // u1.addRole(r1);
+
+          // const response = await u1.hasRole(r1);
+          // console.log(response);
 
      })
 }

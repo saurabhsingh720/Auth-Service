@@ -13,3 +13,12 @@ ze db:migrate`
 - Now install `npm i jsonwebtoken`
 - Added all the function that helps in signing in in with the correct email and password.
 - Added function that only works when both email and password is entered by users.
+- Done authentication
+
+**Implementing authorisation**
+- lets create a `role` model
+- do `npx sequelize model:generate --name Role --attributes name:string`
+- The above command creates a migration file and a model file
+- do `npx sequelize db:migrate` , this will create tables of name `roles`
+- do `npx sequelize seed:generate --name add-roles`
+- do `npx sequelize db:seed --seed filename.js`
