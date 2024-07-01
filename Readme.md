@@ -22,3 +22,6 @@ ze db:migrate`
 - do `npx sequelize db:migrate` , this will create tables of name `roles`
 - do `npx sequelize seed:generate --name add-roles`
 - do `npx sequelize db:seed --seed filename.js`
+
+**Handling the different errors**
+- install package for error `npm i http-status-codes`
