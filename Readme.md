@@ -25,3 +25,4 @@ ze db:migrate`
 
 **Handling the different errors**
 - install package for error `npm i http-status-codes`
+- Added different error handling files
